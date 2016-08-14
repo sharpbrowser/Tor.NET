@@ -84,19 +84,19 @@ This functions the same as the  CreateCircuit() method, however the method accep
 
 This functions near the same as the the CreateCircuit(string[]) method, except that the routers specified in the argument list will be appended onto the end of an existing circuit.
 
-### client.BandwidthChanged (event)
+### client.Status.BandwidthChanged (event)
 
 This is raised whenever the download and update rates, estimated for within the last second, have changed within the Tor service. When requests are being dispatched across a connection these values reflect the number of bytes downloaded and uploaded, on average, since the last event.
 
-### client.CircuitsChanged (event)
+### client.Status.CircuitsChanged (event)
 
 This is raised whenever circuits have been altered in the Tor service. When the event is raised, this signals that the  Circuits property contains new information.
 
-### client.ORConnectionsChanged (event)
+### client.Status.ORConnectionsChanged (event)
 
 This is raised whenever OR connections have been altered in the Tor service. When the event is raised, this signals that the  ORConnections property contains new information.
 
-### client.StreamsChanged (event)
+### client.Status.StreamsChanged (event)
 
 This is raised whenever streams have been altered in the Tor service. When the event is raised, this signals that the  Streams property contains new information.
 
