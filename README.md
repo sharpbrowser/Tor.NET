@@ -48,7 +48,7 @@ Tor is a sophisticated security system that enables users from across the world 
 		stream.Read(..);
 	}
 	
-## API
+# API
 
 The Client class contains a Controller property which provides some methods for controlling elements of the service. The methods available in the class are designed to automate the connection to the control port, and the dispatch of commands. These methods also perform validation on the parameters provided.
 
