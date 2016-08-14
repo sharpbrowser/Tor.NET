@@ -1,0 +1,133 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8EECD857-F347-4102-97D3-62A88F4FA23C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tor</RootNamespace>
+    <AssemblyName>Tor</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>
+    </DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Circuits\Circuit.cs" />
+    <Compile Include="Circuits\Enumerators\CircuitBuildFlags.cs" />
+    <Compile Include="Circuits\Enumerators\CircuitHSState.cs" />
+    <Compile Include="Circuits\Enumerators\CircuitPurpose.cs" />
+    <Compile Include="Circuits\Enumerators\CircuitReason.cs" />
+    <Compile Include="Circuits\Enumerators\CircuitStatus.cs" />
+    <Compile Include="Client.cs" />
+    <Compile Include="ClientCreateParams.cs" />
+    <Compile Include="ClientRemoteParams.cs" />
+    <Compile Include="Configuration\Attributes\ConfigurationAssocAttribute.cs" />
+    <Compile Include="Configuration\Configuration.cs" />
+    <Compile Include="Configuration\Enumerators\ConfigurationNames.cs" />
+    <Compile Include="Configuration\Enumerators\ConfigurationValidation.cs" />
+    <Compile Include="Controller\Base\Command.cs" />
+    <Compile Include="Controller\Base\Response.cs" />
+    <Compile Include="Controller\Commands\CloseCircuitCommand.cs" />
+    <Compile Include="Controller\Commands\CloseStreamCommand.cs" />
+    <Compile Include="Controller\Commands\CreateCircuitCommand.cs" />
+    <Compile Include="Controller\Commands\ExtendCircuitCommand.cs" />
+    <Compile Include="Controller\Commands\GetAllRouterStatusCommand.cs" />
+    <Compile Include="Controller\Commands\GetConfCommand.cs" />
+    <Compile Include="Controller\Commands\GetInfoCommand.cs" />
+    <Compile Include="Controller\Commands\GetRouterStatusCommand.cs" />
+    <Compile Include="Controller\Commands\SaveConfCommand.cs" />
+    <Compile Include="Controller\Commands\SetConfCommand.cs" />
+    <Compile Include="Controller\Commands\SignalClearDNSCacheCommand.cs" />
+    <Compile Include="Controller\Commands\SignalHaltCommand.cs" />
+    <Compile Include="Controller\Commands\SignalNewCircuitCommand.cs" />
+    <Compile Include="Controller\Connection\Connection.cs" />
+    <Compile Include="Controller\Connection\ConnectionResponse.cs" />
+    <Compile Include="Controller\Control.cs" />
+    <Compile Include="Controller\Enumerators\StatusCode.cs" />
+    <Compile Include="Core\Bytes.cs" />
+    <Compile Include="Core\Converters\BytesTypeConverter.cs" />
+    <Compile Include="Core\Converters\HostAuthTypeConverter.cs" />
+    <Compile Include="Core\Converters\HostTypeConverter.cs" />
+    <Compile Include="Core\Enumerators\Auto.cs" />
+    <Compile Include="Core\Enumerators\Bits.cs" />
+    <Compile Include="Core\Exceptions\TorException.cs" />
+    <Compile Include="Core\Helpers\ReflectionHelper.cs" />
+    <Compile Include="Core\Helpers\StringHelper.cs" />
+    <Compile Include="Core\Host.cs" />
+    <Compile Include="Core\HostAuth.cs" />
+    <Compile Include="Events\Attributes\EventAssocAttribute.cs" />
+    <Compile Include="Events\Base\Dispatcher.cs" />
+    <Compile Include="Events\Dispatchers\BandwidthDispatcher.cs" />
+    <Compile Include="Events\Dispatchers\CircuitDispatcher.cs" />
+    <Compile Include="Events\Dispatchers\ConfigChangedDispatcher.cs" />
+    <Compile Include="Events\Dispatchers\LogDispatcher.cs" />
+    <Compile Include="Events\Dispatchers\ORConnectionDispatcher.cs" />
+    <Compile Include="Events\Dispatchers\StreamDispatcher.cs" />
+    <Compile Include="Events\Enumerators\Event.cs" />
+    <Compile Include="Events\Events.cs" />
+    <Compile Include="Events\Events\BandwidthEvent.cs" />
+    <Compile Include="Events\Events\CircuitEvent.cs" />
+    <Compile Include="Events\Events\ConfigurationChangedEvent.cs" />
+    <Compile Include="Events\Events\LogEvent.cs" />
+    <Compile Include="Events\Events\ORConnectionEvent.cs" />
+    <Compile Include="Events\Events\StreamEvent.cs" />
+    <Compile Include="IO\Socks5Stream.cs" />
+    <Compile Include="Logging\Logging.cs" />
+    <Compile Include="ORConnections\Enumerators\ORReason.cs" />
+    <Compile Include="ORConnections\Enumerators\ORStatus.cs" />
+    <Compile Include="ORConnections\ORConnection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Proxy\Processors\ConnectionProcessor.cs" />
+    <Compile Include="Net\Processors\Socks5Processor.cs" />
+    <Compile Include="Proxy\Proxy.cs" />
+    <Compile Include="Proxy\Socks5Proxy.cs" />
+    <Compile Include="Proxy\Connection\Connection.cs" />
+    <Compile Include="Net\Socket\ForwardSocket.cs" />
+    <Compile Include="Routers\Enumerators\RouterFlags.cs" />
+    <Compile Include="Routers\Router.cs" />
+    <Compile Include="Status\Status.cs" />
+    <Compile Include="Streams\Enumerators\StreamPurpose.cs" />
+    <Compile Include="Streams\Enumerators\StreamReason.cs" />
+    <Compile Include="Streams\Enumerators\StreamStatus.cs" />
+    <Compile Include="Streams\Stream.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
