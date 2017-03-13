@@ -140,6 +140,15 @@ namespace Tor.Config
         }
 
         /// <summary>
+        /// Gets or sets the data directory path.
+        /// </summary>
+        public string DataDirectory
+        {
+            get { return GetValue(ConfigurationNames.DataDirectory) as string; }
+            set { SetValue(ConfigurationNames.DataDirectory, value); }
+        }
+
+        /// <summary>
         /// Gets or sets a value indicating whether the Tor application shouldn't listen for accept any connections other than control connections.
         /// </summary>
         public bool DisableNetwork
