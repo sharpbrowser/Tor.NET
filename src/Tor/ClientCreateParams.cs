@@ -192,9 +192,6 @@ namespace Tor
             builder.Append("--allow-missing-torrc ");
             builder.AppendFormat("--ControlPort {0}", controlPort);
 
-            /** TEMPORARY: DELETE LATER **/
-            builder.AppendFormat(" --SocksPort 9050");
-
             if (!string.IsNullOrWhiteSpace(configurationFile))
                 builder.AppendFormat(" -f \"{0}\"", configurationFile);
 
