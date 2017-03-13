@@ -43,6 +43,9 @@ namespace Tor.Config
         [ConfigurationAssoc("ConstrainedSockSize", Default = 8388608.0, Type = typeof(Bytes), Validation = ConfigurationValidation.NonNull | ConfigurationValidation.SizeDivision)]
         ConstrainedSockSize,
 
+        [ConfigurationAssoc("DataDirectory", Default = null, Type = typeof(string))]
+        DataDirectory,
+
         [ConfigurationAssoc("DisableNetwork", Default = false, Type = typeof(bool))]
         DisableNetwork,
 
