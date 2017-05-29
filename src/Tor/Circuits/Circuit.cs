@@ -46,6 +46,85 @@ namespace Tor
             this.timeCreated = DateTime.MinValue;
         }
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="Circuit"/> class from respone line.
+        /// </summary>
+        /// <param name="client">The client for which the circuit belongs.</param>
+        /// <param name="line">The line which was received from the control connection.</param>
+        /// <returns>
+        ///   <c>Circuit</c> a new instance.
+        /// </returns>
+        public static Circuit FromLine(Client client, string line)
+        {
+            int index = 0;
+            int circuitID = 0;
+            string[] parts = StringHelper.GetAll(line, ' ');
+            Circuit circuit = null;
+            List<string> routers = new List<string>();
+
+            if (parts == null || parts.Length < 2)
+                return null;
+
+            if (!int.TryParse(parts[0], out circuitID))
+                return null;
+
+            circuit = new Circuit(client, circuitID);
+            circuit.Status = ReflectionHelper.GetEnumerator<CircuitStatus, DescriptionAttribute>(attr => parts[1].Equals(attr.Description, StringComparison.CurrentCultureIgnoreCase));
+
+            for (int i = 2, length = parts.Length; i < length; i++)
+            {
+                string data = parts[i];
+
+                index += data.Length + 1;
+                data = data.Trim();
+
+                if (!data.Contains("="))
+                {
+                    routers.AddRange(data.Split(','));
+                    continue;
+                }
+
+                string[] values = data.Split(new[] { '=' }, 2);
+                string name = values[0].Trim();
+                string value = values[1].Trim();
+
+                if (name.Equals("BUILD_FLAGS"))
+                {
+                    string[] flags = value.Split(',');
+
+                    foreach (string flag in flags)
+                        circuit.BuildFlags |= ReflectionHelper.GetEnumerator<CircuitBuildFlags, DescriptionAttribute>(attr => flag.Equals(attr.Description, StringComparison.CurrentCultureIgnoreCase));
+                }
+                else
+                {
+                    switch (name)
+                    {
+                        case "HS_STATE":
+                            circuit.HSState = ReflectionHelper.GetEnumerator<CircuitHSState, DescriptionAttribute>(attr => value.Equals(attr.Description, StringComparison.CurrentCultureIgnoreCase));
+                            break;
+                        case "PURPOSE":
+                            circuit.Purpose = ReflectionHelper.GetEnumerator<CircuitPurpose, DescriptionAttribute>(attr => value.Equals(attr.Description, StringComparison.CurrentCultureIgnoreCase));
+                            break;
+                        case "REASON":
+                            circuit.Reason = ReflectionHelper.GetEnumerator<CircuitReason, DescriptionAttribute>(attr => value.Equals(attr.Description, StringComparison.CurrentCultureIgnoreCase));
+                            break;
+                        case "TIME_CREATED":
+                            DateTime timeCreated;
+                            if (DateTime.TryParse(value, out timeCreated))
+                                circuit.TimeCreated = timeCreated;
+                            else
+                                circuit.TimeCreated = DateTime.MinValue;
+                            break;
+                    }
+                }
+            }
+
+            circuit.Paths = routers;
+            circuit.GetRouters();
+
+            return circuit;
+        }
+
         #region Properties
 
         /// <summary>
